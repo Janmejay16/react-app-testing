@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+/* eslint-disable react/react-in-jsx-scope */
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  const [name, setName] = useState("")
+  const [visible, setVisible] = useState(false)
+
+  const onNameChange = e => {
+    setName(e.target.value)
+  }
+
+  const handleClick = e => {
+    if(e) setVisible(!visible)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" onChange={onNameChange} />
+      <button onClick={handleClick}>
+          {visible ? "Hide" : "Show"}
+      </button>
+      <br/>
+      {visible ? <p>{name}</p> : null}
     </div>
   );
 }
